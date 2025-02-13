@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+    padding: 0 5rem;
+}
+
+.logo .logo-heading {
+    color: #fff;
+}
+
+.links {
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s;
+    padding: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.links:hover {
+    color: grey;
+}
+
+.menu .menu-list {
+    display: flex;
+    list-style: none;
+}
+
+.menu-list .menu-list-items {
+    padding: 0.5rem 1rem;
+}
+
+.hero {
+    /* background-image: url('./Images/heroImg3.avif'); */
+    /* background-repeat: no-repeat; */
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    background-color: #0a0a0a;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#home.hero {
+    background-image: url(images/space_cyber.png);
+}
+
+.home-text {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    margin-left: 5vw;
+}
+
+.nos3 {
+    background-color: green;
+    width: 100%;
+    height: 100vh;
+    border: 2px solid red;
+    /* This will make it easier to see */
+    display: none;
+}
