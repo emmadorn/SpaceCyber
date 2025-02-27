@@ -33,8 +33,13 @@
                         </a>
                     </li>
                     <li class="menu-list-items">
-                        <a id="tutorials-link" class="links" href="#tutorials">
-                            Tutorials
+                        <a id="demos-link" class="links" href="#demos">
+                            Demos
+                        </a>
+                    </li>
+                    <li class="menu-list-items">
+                        <a id="other-link" class="links" href="#other">
+                            Other Resources
                         </a>
                     </li>
                 </ul>
@@ -42,38 +47,152 @@
         </nav>
     </header>
     
-    <section id="home" class="hero">
+    <section id="home" class="home" style="display: block">
         <div class="home-text">
-            [ instert description here ]
+            [Lorem Ipusum]
         </div>
     </section>
 
     <section class="nos3" id="nos3" style="display: none">
         <div class="nos3_heading">
-            <h1 class="my-heading text-center">nos3</h1>
+            NOS3: NASA Operational Simulation for Small Satellites
         </div>
         <div class="nos3_content">
             <div class="nos3_container">
+                <div>Getting Started: <a class="install_link" id="installation-link" href="#installation">Setting up NOS3</a></div>
+                <div>Breakdown of NOS3: [link for breakdown of directories]</div>
+                <div>[insert demo video using nos3]</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="installation" id="installation" style="display: none">
+        <div class="installation_heading">
+            Setting up NOS3
+        </div>
+        <div class="installation_content">
+            <div class="installation_container">
+                <h1>Requirements</h1>
+                <div> <span>Using a virtualmachine (VM):</span></div>
+                <ul>
+                    <li>Git 2.47+</li>
+                    <li>Vagrant 2.4.3+</li>
+                    <li>VirtualBox 7.1.6+ (<a class="install_link" href="https://www.virtualbox.org/wiki/Downloads">link to downloading virtualbox</a>)</li>
+                </ul>
+                <div>Linux:</div>
+                <ul>
+                    <li>Git 2.47+</li>
+                    <li>Docker and docker compose</li>
+                </ul>
+                <h1>Verify requirements</h1>
+                <div>VM:</div>
+                <ul>
+                    <li><span>In terminal, run <b>git --version</b></span></li>
+                    <li><span>In terminal, run <b>vagrant --version</b></span></li>
+                </ul>
+                <h1>Open terminal and run the following commands</h1>
+                <ul>
+                    <li><span><b>git clone https.//github.com/nasa/nos3.git</b></span></li>
+                    <li><span><b>cd nos3</b></span></li>
+                    <li><span><b>git submodule update --init --recursive</b></span></li>
+                </ul>
+                <div>For VM:</div>
+                <ul>
+                    <li><span><b>vagrant up</b></span></li>
+                    <li><span><b>vagrant halt</b></span></li>
+                </ul>
+                <div>Now open VirtualBox and start the VM</div>
+                <div><span>Use the password <b>jstar123!</b> to log in to <b>jstar</b></span></div>
+                <h1>Running NOS3</h1>
+                <div>In terminal, run the following commands:</div>
+                <ul>
+                    <li><span><b>cd ~/Desktop/github-nos3</b></span></li>
+                    <li><span><b>make prep</b></span></li>
+                    <li><span><b>make</b></span></li>
+                    <li><span><b>make launch</b></span></li>
+                </ul>
+                <h1>Stopping NOS3</h1>
+                <ul>
+                    <li><span><b>make stop</b></span></li>
+                    <li><span><b>make clean</b></span></li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section class="cFS" id="cFS" style="display: none">
         <div class="cFS_heading">
-            <h1 class="my-heading text-center">cFS</h1>
+            cFS: core Flight System
         </div>
         <div class="cFS_content">
             <div class="cFS_container">
+                <h1>What is cFS?</h1>
+                <h1>Create your own app on cFS Equuleus</h1>
+                <div>Copy directory and rename files:</div>
+                <ol>
+                    <li><span><b>~/src/cFS/apps cp -r sample_app/my_app</b></span> </li>
+                    <li><span><b>~/src/cFS/apps cd my_app</b></span></li>
+                    <li><span><b>~/src/cFS/apps/my_app/fsw/src rename sample_app my_app</b></span></li>
+                    <li><span><b>~/src/cFS/apps/my_app/fsw/inc rename sample_app my_app</b></span></li>
+                    <li><span><b>~/src/cFS/apps/my_app/fsw/tables rename sample_app my_app</b></span></li>
+                </ol>
+                <div>Modify the new files:</div>
+                <div><span>Use Visual Studio Code (or another code editor) to replace most instances of <b>sample</b> with <b>my</b></span></div>
+                <div>Be sure to preserve case</div>
+                <div>Exceptions:</div>
+                <div><span>In <b>my_app.h</b></span></div>
+                <ol>
+                    <li><span>Line 34, 35: leave as <b>sample_app_..._.h</b></span></li>
+                    <li><span>Line 59: leave as <b>SAMPLE_APP_HkTlm_t</b></span></li>
+                    <li><span>Line 77: leave as <b>SAMPLE_APP_NUMBER_OF_TABLES</b></span></li>
+                </ol>
+                <div><span>In <b>my_app.c</b></span></div>
+                <ol>
+                    <li><span>Line 53, 74, 82, 101: leave as <b>SAMPLE_APP_PERF_ID</b></span></li>
+                    <li><span>Line 124, 142, 161: leave as <b>SAMPLE_APP_PIPE_DEPTH</b></span></li>
+                    <li><span>Line 187: leave as <b>SAMPLE_APP_ExampleTable_t</b></span></li>
+                    <li><span>Line 196: leave as <b>SAMPLE_APP_TABLE_FILE</b></span></li>
+                    <li>Comment out:
+                        <ol>
+                            <li><span>Lines 183-203: <b>if(status = CFE_SUCCESS) {...}</b></span></li>
+                            <li><span>Line 115: <b>char VersionString[MY_APP_CFG_MAX_VERSION_STR_LEN];</b></span></li>
+                        </ol>
+                    </li>
+                </ol>
+                <div><span>In <b>my_app_cmds.h</b></span></div>
+                <ol>
+                    <li><span>Lines 33-37: leave constant type as <b>SAMPLE_APP_XXX_..._.h</b></span></li>
+                </ol>
+                <!-- <div>attack documentation</div> -->
             </div>
         </div>
     </section>
 
-    <section class="tutorials" id="tutorials" style="display: none">
-        <div class="tutorials_heading">
-            <h1 class="my-heading text-center">Tutorials</h1>
+    <section class="demos" id="demos" style="display: none">
+        <div class="demos_heading">
         </div>
-        <div class="tutorials_content">
-            <div class="tutorials_container">
+        <div class="demos_content">
+            <div class="triad_container">
+                <img src="images/CIA_TRIAD.png" alt="CIA Triad">
+                <div class="triad_text">Confidentiality</div>
+                <div class="triad_text">Integrity</div>
+                <div class="triad_text">Availability</div>
+            </div>
+            <h1>Confidentiality attack</h1>
+            <h1>Integrity attack</h1>
+            <h1>Accessibility: pipeline overflow and link to documentation</h1>
+        </div>
+    </section>
+
+    <section class="other" id="other" style="display: none">
+        <div class="other_heading">
+            <div>Other Resources</div>
+        </div>
+        <div class="other_content">
+            <div class="other_container">
+                <a target="_blank" href="http://www.stf1.com/NOS3Website/Nos3MainTab.php">NOS3 Website</a>
+                <a target="_blank" href="https://github.com/nasa/nos3">NOS3 GitHub</a>
+                <a target="_blank" href="https://github.com/nasa/cFS">cFS GitHub</a>
             </div>
         </div>
     </section>
