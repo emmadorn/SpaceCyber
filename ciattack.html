@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceCyber</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <!-- <script src="scripts.js"></script> -->
+</head>
+
+<body>
+    <header id="page-header"></header>
+    <script async src="header.js"></script>
+
+    <div class="content-container ci" id="ci">
+        <div class="ci-heading">cFS: Exploiting the Command Ingest Module</div>
+        <div class="ci-content">
+            <div class="text-block paragraph1">1. What is the Command Ingest Module
+                and how does it work?
+            </div>
+            <div class="text-block paragraph2">
+                a.  “ci_lab” (Command Ingest Lab) is responsible for 
+                receiving and processing the ground commands that are typically 
+                sent during mission operations. These commands may be sent to 
+                control various subsystems of the spacecraft (e.g., thermal, power, 
+                or communication) 
+            </div>
+            <div class="text-block paragraph2">
+                b.  The Command Ingestor in cFS is responsible for 
+                receiving, interpreting, and validating commands.
+            </div>
+            <div class="text-block paragraph1">
+                2. What is the basic flow of how command get where they need to be?
+            </div>
+            <div class="text-block paragraph2">
+                a. Ground sends the command
+            </div>
+            <div class="text-block paragraph2">
+                b. Command Ingest Module processes the command
+            </div>
+            <div class="text-block paragraph2">
+                c. Message is placed on the software bus
+                <ol type="i"> 
+                    <li>
+                        The Software Bus is implemented as a message queue, 
+                        and when a command is placed onto the bus, it is placed 
+                        into the queue as a message.
+                    </li>
+                    <li>
+                        The message is then made available for subscribed 
+                        apps or components to read and process.
+                    </li>
+                    <li>
+                        Message Routing: The SB service routes the message to the appropriate 
+                        pipe based on the message ID. Each application subscribes to specific message 
+                        IDs, so the SB service knows which pipe to send the message to
+                    </li>
+                    <li>
+                        The SB service maintains a subscription table that maps message IDs 
+                        to the pipes of subscribing applications. This table is updated whenever 
+                        an application subscribes to or unsubscribes from a message ID
+                    </li>
+                </ol>
+            </div>
+            <div class="text-block paragraph2">
+                d. Application(s) meant to act on the command retrieve it from the bus
+                <ol type="i">
+                    <li>
+                        Pipe Creation: Each application that needs to receive commands 
+                        creates a pipe using the SB service. A pipe is essentially a queue 
+                        that holds messages until the application processes them. 
+                    </li>
+                </ol>
+            </div>
+            <div class="text-block paragraph2">
+                e. Command Handler within the app process the command and tasks the action to be executes
+                <ol type="i">
+                    <li>
+                        After executing the command, the application may generate a status message or 
+                        telemetry data to indicate whether the command was successfully executed or 
+                        whether an error occurred.
+                    </li>
+                </ol>
+            </div>
+            <div class="text-block paragraph1">
+                Example:
+            </div>
+            <div class="text-block paragraph1">
+                <ol>
+                    <li>Ground sends command: “Increase internal temperature 5 degrees”</li>
+                    <li>Command Ingest Module takes in the command and places it on software bus </li>
+                    <li>Thermal Application retrieves the command </li>
+                    <li>Thermal Application increases the internal temperature 5 degrees</li>
+                </ol>
+            </div>
+            <div class="text-block paragraph2">
+                3. How can we exploit the Command Ingest Module?
+            </div>
+            <div class="text-block paragraph2">
+                <ol type="a">
+                    <li>Impersonate ci_lab</li>
+                    <li>
+                        <ol type="a">
+                            <li>
+                                i.	Goal: Another app connected on the SB impersonates 
+                                the communications sent from the command ingest module 
+                                to other applications, and the other applications onboard 
+                                have no way of distinguishing, so as such they assume every 
+                                command is authentic. 
+                            </li>
+                            <li>
+                                How do we impersonate the communications of ci_lab?
+                                1.	Subscribe to the same things at ci_lab 
+                                    a.	Allows us to listen 
+                                2.	Subscribe to all potential messages 
+                                    a.	Subscription Registration: When an application starts, 
+                                    it registers with the SB service and subscribes to specific 
+                                    message IDs. This is done using the CFE_SB_Subscribe function, 
+                                    where the application specifies the message IDs it wants to receive
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>

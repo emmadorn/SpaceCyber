@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceCyber</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <!-- <script src="scripts.js"></script> -->
+</head>
+<body>
+    <header id="page-header"></header>
+    <script async src="header.js"></script>
+    <div class="content-container directories" id="directories">
+        <div class="installation_heading">
+            NOS3 Directories
+        </div>
+        <div class="directories_content">
+            <div class="directories_container">
+                <div class="text-block paragraph1">General Definitions</div>
+                <div class="text-block paragraph2">
+                    <ul>
+                        <li>F' (F Prime): Flight spftware framework designed for developing embedded systems
+                            on spacecraft, responsible for onboard oeprations
+                        </li>
+                        <li> COSMOS: Open source ground system software by Ball Aerospace, 
+                            provides command and control of flight software
+                        </li>
+                        <li> 42: OPen source visualization and simulation tool for spacecraft attitude and orbital dynamics,
+                            used to provide dynamic enironmental data
+                        </li>
+                        <li> fsw: Directories contain things for cFS ("flight software")</li>
+                        <li> gsw: Directories contain things for COSMOS ("ground software")</li>
+                    </ul>
+                </div>
+                <div class="text-block paragraph1">The following are <b>directories</b>:</div>
+                <div class="text-block paragraph2">
+                    <ol>
+                        <li><b>Components</b></li>
+                        <ol type="i">
+                            <li><a href="https://github.com/nasa-itc/arducam/tree/b05c9746b7f49f852a79e05ccc7f01e043fca72f">arducam</a>: 
+                                contains ArduCam cFS app (simulates camera functionality for interfacing with CubeSats
+                                or small satellites, allows for testing image capture, processing, and communication)</li>
+                            <li><a href="https://github.com/nasa/CryptoLib/tree/fb72ee2e836f39737e0df20d838bae56076d277b">cryptolib</a>: 
+                                provides software-only solution using CCSDS Space Data Link Security Protocol - 
+                                Extended Procedures (SDLS-EP) to secure communications between a spacecraft running cFS and a ground station</li>
+                            <li><a href="https://github.com/nasa-itc/generic_adcs/tree/4911e51d589623ab1c1899d1eac6ccde57fa40e1">generic_adcs</a>: 
+                                Attitude Determination and Control System (simulates sensors determining the orientation of the satellite in space)</li>
+                            <li><a href="https://github.com/nasa-itc/generic_css/tree/448e0251a2e5ff756c9c86142f17db6be45a7662">generic_css</a>: 
+                                I2C device (Inter-Integrated Circuit, a synchronous serial communication protocol), accepts 
+                                multiple commands including requests for telemetry</li>
+                            <li><a href="https://github.com/nasa-itc/generic_eps/tree/c460ba5a6e9ab9eb9f0f04bd009517b7a0ad24c6">generic_eps</a>: 
+                                Electrical Power System, I2C device that accepts commands to switch state, request telemetry and reset the spacecraft</li>
+                            <li><a href="https://github.com/nasa-itc/generic_fss/tree/29426d8d7d6d253272bda468076a1b6453327a47">generic_fss</a>: 
+                                Fine Sun Sensor, SPI (Serial Peripheral Interface) device that accepts commands to retrieve sun angles and 
+                                returns sun angles and an error code</li>
+                            <li><a href="https://github.com/nasa-itc/generic_imu/tree/5e317f3b3734c6944843fb0afc06fc14099bac5a">generic_imu</a>: 
+                                Inertial Measurement Unit, CAN (Controller Area Network) device that responds to requests for telemetry and data</li>
+                            <li><a href="https://github.com/nasa-itc/generic_magnetometer/tree/c995ff79d2b49351761b255ab48de3121f52b634">generic_mag</a>: 
+                                SPI device accepting multiple commands which include requests for telemetry</li>
+                            <li><a href="https://github.com/nasa-itc/generic_radio/tree/f721f9b7a838d03fc5c4498316e1743ff1c455c8">generic_radio</a>: 
+                                socket based device accepting multiple commands which include requests for telemetry and data</li>
+                            <li><a href="https://github.com/nasa-itc/generic_reaction_wheel/tree/838cc687594bb77a5fa456c593c77c73edb7bf69">generic_reaction_wheel</a>: 
+                                contains generic reaction wheel cFS app</li>
+                            <li><a href="https://github.com/nasa-itc/generic_star_tracker/tree/bc075ea8c1eaec71c613c8bb9e20582ae02c6430">generic_star_tracker</a>: 
+                                UART (Universal Asynchronous Receiver-Transmitter) device accepting multiple commands including 
+                                requests for telemetry and data</li>
+                            <li><a href="https://github.com/nasa-itc/generic_thruster/tree/feb2d6555fb09e0f1b33a3993819799ad42ce0d5">generic_thruster</a>: 
+                                UART device used to enable the thrusters, setting them to a percent of a full thrust</li>
+                            <li><a href=https://github.com/nasa-itc/generic_torquer/tree/bd9242dceba6c982191efdb9cb8a0aaedf4aad65">generic_torquer</a>: 
+                                device that accepts as input a current (% of the max) and returns value of generated magnetic field</li>
+                            <li><a href="https://github.com/nasa-itc/novatel_oem615/tree/ba08c053c734ebdf94f4f3e3dc787a52b2a73a3f">novatel_oem615</a>: 
+                                NovAtel OEM 615 cFS app, USART (Universal Synchronous-Asynchronous Receiver-Transmitter) device accepting multiple </li>
+                            <li><a href="https://github.com/nasa-itc/sample/tree/7845664c3ed42e4aa83d04fae1b507099ae21b55?tab=readme-ov-file">sample</a>: 
+                                contains template component for integrating new components in NOS3</li>
+                            <li><a href="https://github.com/nasa-itc/syn/tree/b7d5cc8bde0d88ba20700a02acb17cf95644de1a">syn</a>: 
+                                provides executable SYNOPSIS example for the user (a library with 8 sets of data modified by user)</li>
+                        </ol>
+                        <li><b>FSW</b> - Repositories needed to configure cFS for NOS3</li>
+                        <ol type="i">
+                            <li><a href="https://github.com/nasa-itc/CF/tree/13e98e12e565b90f577537ec1be3ad4557178fe8">cf</a>: 
+                                CFDP application, provides CFDP (CCSDS File Delivery Protocol) CCSDS 727.0-B-5 compliant services, provides 
+                                file receive and transmit functionality to this protocol</li>
+                            <li><a href="https://github.com/nasa-itc/CFS_CI/tree/57189901d7eae241a90e4fc346748bf56a686856">ci</a>: 
+                                Command Ingest, responsible for receiving commands from external source 
+                                (like a ground station) over a transport channel, and forwards command to appropriate application over the software bus (SB)</li>
+                            <li><a href="https://github.com/nasa-itc/ci_lab/tree/5dd2cf50a827c4837c867a0bdc58b5295caf61c1">ci_lab</a>: 
+                                Command Ingest Lab, simple command uplink app that accepts CCSDS telecommand packets over a UDP/IP port
+                                 (does not provide full CCSDS Telecommand stack implementation)</li>
+                            <li><a href="https://github.com/nasa-itc/DS/tree/d17e750bec8ec9a2cfbcd32f5633dafaf919bc40">ds</a>: 
+                                Data Storage app, stores SB messages in files, generally stored on a storage device as a solid state 
+                                recorder but could be stored on any file system</li>
+                            <li><a href="https://github.com/nasa-itc/FM/tree/e7410e593f12f05a834c646ea8241e4c98c2a4a3">fm</a>: 
+                                File Manager app, provides onboard file system management services by processing ground command for copying, moving and renaming 
+                                files, decompressing files, creating directories, deleting files and directories, providing file and directory informational telemetry 
+                                messages, as well as open file and directory listings</li>
+                            <li><a href="https://github.com/nasa-itc/hwlib/tree/9c4dc2a169f220c515629e5e8cc1a60929605035">hwlib</a>: 
+                                Hardware library, provides abstraction layer for hardware interfaces across platforms (i.e. linux and nos-linux)</li>
+                            <li><a href="https://github.com/nasa-itc/CFS_IO_LIB/tree/523edf70f8a620f4a7988eef3beb23713289d1a4">io_lib</a>: 
+                                Input/Output library, collection of protocol libraries to be called by the CI/TO application custom implementations</li>
+                            <li><a href="https://github.com/nasa-itc/LC/tree/f49a965a329dd853bd2fdd9ad3c0137d736154a0">lc</a>: 
+                                Limit Checker, monitors telemetry data points and compares the values against predefined threshold limits; when a threshold condition 
+                                is encountered, event message is issued and a Relative Time Sequence (RTS) command script may be initiated to respond to the violation</li>
+                            <li><a href="https://github.com/nasa-itc/SC/tree/bb3e6945830b7e6cd7a3d25fa00969ac2c4f7be6">sc</a>: 
+                                Stored Command app, allows system to be autonomously commanded using sequences of commands that are loaded to it, supports both Absolute 
+                                Time tagged command Sequences (ATSs) and Relative Time tagged command Sequences (RTSs)</li>
+                            <li><a href="https://github.com/nasa-itc/SCH/tree/3c4af159bb4032311103332cb50bb752d1b57abe">sch</a>: 
+                                Scheduler, provides method of generating software bus messages at pre-determined timing intervals</li>
+                            <li><a href="https://github.com/nasa-itc/CFS_TO/tree/db65b4381160adbbd35b8b140b2e5a19cfab1c5a">to</a>: 
+                                Telemetry Output, responsible for transmitting telemetry to external destinations over transport devices</li>
+                            <li><a href="https://github.com/nasa-itc/to_lab/tree/bdee03feae576efc8a91a97b0574cb8d6392627c">to_lab</a>: 
+                                Telemetry Output lab, simple telemetry downlink app that sends CCSDS telecommand packets over a UDP/IP port</li>
+                            <li><a href="https://github.com/nasa-itc/cFE/tree/79c22d9edfe425f39efc782bb168aefe8db5ddf7">cfe</a>: 
+                                Contains NASA’s Core Flight Executive, a collection of services and associated framework to be located in the cfe subdirectory 
+                                of a cFS Mission Tree</li>
+                            <li><a href="https://github.com/nasa-itc/osal/tree/9c9b9f6dd75b7b3adaf9021040db3d112ef709e5">osal</a>: 
+                                Contains NASA’s Operating System Abstraction Layer (OSAL), a collection of abstraction APIs and associated 
+                                framework to be located in osal subdirectory of a cFS Mission Tree</li>
+                            <li><a href="https://github.com/nasa-itc/PSP/tree/cd5546b9b873fb50a5a7154d4072356dc6ba042e">psp</a>: 
+                                Platform Support Package (PSP), collection of APIs abstracting platform specific functionality to be located in psp subdirectory 
+                                of a cFS Mission Tree</li>
+                            <li><a href="https://github.com/nasa-itc/elf2cfetbl/tree/358201af7ab296631c7118a5b0b91055d3d4ce10">elf2cfetbl</a>: 
+                                ELF to cFE Table Converter Tool, converts ELF to cFE binary tables for cFS</li>
+                        </ol>
+                        <li><b>GSW</b> - NOS3 ground station files and other ground-based tool (related to COSMOS)</li>
+                        <ol type="i">
+                            <li><a href="https://github.com/nasa-itc/OrbitInviewPowerPrediction/tree/0eed643eeaa9bcc35020b0b38399c25b616421c2">OrbitInviewPowerPrediction</a>: 
+                                Orbit Inview and Power Prediction Tool, README file states to look through the code for learning what the latest 
+                                OIPP does</li>
+                            <li><a href="https://github.com/nasa-itc/gsw-cosmos/tree/a8d96bc426554cd09ee332e78ea4d5e3982f4623">cosmos</a>: 
+                                SmallSAT COSMOS Database, used for capturing command and telemetry definitions, testing procedures/scripts, and operational scripts</li>
+                        </ol>
+                        <li><b>SIMS</b - NOS3 simulators and configuration files (related to 42)</li>
+                        <ol type="i">
+                            <li><a href="https://github.com/nasa-itc/nos_time_driver/tree/5c2787a35c904c1d4f49b01f23acabc3ac37a079">nos_time_driver</a>: 
+                                NOS Engine Time Driver, making sure different components are synchronized when running simulations to ensure realism</li>
+                            <li><a href="https://github.com/nasa-itc/sim_common/tree/8cb9ddcb5915ee7e286aee0d5e3e0e458f8110a8">sim_common</a>: 
+                                contains shared files and utilities used for multiple simulation components (i.e. libraries, base models, configurations)</li>
+                            <li><a href="https://github.com/nasa-itc/sim_terminal/tree/d6603c66bd6c25c59c239a197ef915c257845df3">sim_terminal</a>: 
+                                tools/interfaces for interacting with simulations (i.e. logging, command inputs, or telemetry outputs)</li>
+                            <li><a href="https://github.com/nasa-itc/truth_42_sim/tree/e1b1e2657345d44be82fb72b0706ce8f178f1fd1">truth_42_sim</a>: 
+                                simulator to connect to 42 and provide packed telemetry to COSMOS, streams data to COSMOS and lets data 
+                                be read in COSMOS, meant to reflect satellite’s real-world dynamics with data to validate simulations</li>
+                        </ol>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -7,13 +7,24 @@ body {
     height: 100vh;
 }
 
-/* ------------------------------------NAV BAR STYLES---------------------------------------- */
+
+/* ------------------------------------NAV BAR STYLES---------------------------------------*/
+
+#page-header {
+    width: 100%;
+    height: 75px;
+}
+
 .logo {
     padding: 0 5rem;
 }
 
 .logo .logo-heading {
     color: #fff;
+}
+
+.logo-heading:hover {
+    color: grey;
 }
 
 .links {
@@ -44,24 +55,22 @@ body {
     height: 75px;
     position: relative;
     top: 0;
-    width: 100vw;
+    width: 100%;
     background-color: #0a0a0a;
     font-family: 'Orbitron', sans-serif;
 }
 
-/* --------------------------------------------------------------------------------------- */
+/* ----------------------------------- HOMEPAGE STYLES ----------------------------------------*/
 
 
 .home {
-    position: relative;
     background-image: url(images/space_cyber.png);
     background-size: 100% 100%;
-    height: calc(100% - 75px);
-    width: 100%;
     display: flex;
-    /* align-items: center;
+    align-items: left;
     vertical-align: center;
-    justify-content: center; */
+    justify-content: center;
+
 }
 
 .home-text {
@@ -71,27 +80,87 @@ body {
     margin-top: 0px; */
     display: flex;
     height: 100%;
-    width: 100%;
+    width: 30%;
     align-items: center;
-    justify-content: left;
-    padding-left: 30px;
-    padding-right: 30px;
+    justify-content: center;
 }
 
-.nos3 {
+/* ----------------------------------- CONTENT PAGE STYLES ----------------------------------------*/
+
+.content-container {
+    padding: 30px;
+    width: calc(100% - 60px);
+    min-height: calc(100% - 75px - 60px);
+    height: fit-content;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(32, 31, 31);
+
+}
+
+.text-block {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.video-block {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.heading1 {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    /* line-height: 40px; */
+    font-weight: 1000;
+    font-size: 30px;
+}
+
+.paragraph1 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.paragraph2 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: smaller;
+}
+
+.paragraph3 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    padding: 30px;
+}
+
+.video {
+    align-self: left;
+    width: 80%;
+    height: auto;
+}
+
+
+
+/* .nos3 {
     background-color: rgb(10, 10, 61);
     background-size: 100% 100%;
-    height: calc(100% - 75px);
-    /*75px in heighth calculation accounts for navabr*/
-    width: 100%;
     display: flex;
     border: 2px solid red;
     box-sizing: border-box;
-    /* border-box stops the red border from resizing the sreen*/
-}
+    border-box stops the red border from resizing the sreen
+} 
+*/
 
-.nos3_heading {
+/* .nos3_heading {
     color: white;
     font-family: 'Orbitron', sans-serif;
     padding: 30px;
@@ -103,11 +172,11 @@ body {
     color: white;
     font-family: 'Courier New', Courier, monospace;
     padding: 30px;
-}
+} */
 
 .installation {
     position: relative;
-    background-color: rgb(10, 10, 61);
+    background-color: rgb(32, 31, 31);
     background-size: 100% 100%;
     min-height: calc(100vh-75px);
     /* height: calc(100% - 75px); */
@@ -154,8 +223,38 @@ body {
     color: grey;
 }
 
+.app_link {
+    color: white;
+}
+
+.app_link:hover {
+    color: grey;
+}
+
+.ci_link {
+    color: white;
+}
+
+.ci_link:hover {
+    color: grey;
+}
+
+.dos_link {
+    color: white;
+}
+
+.dos_link:hover {
+    color: grey;
+}
+
+/* ----------------------------------- CFS STYLES ----------------------------------------*/
+.cFS {
+    background-color: rgb(32, 31, 31);
+    background-size: 100% 100%;
+    color: white;
+}
+
 .cFS_heading {
-    color: black;
     font-family: 'Orbitron', sans-serif;
     padding: 30px;
     font-weight: 1000;
@@ -163,14 +262,13 @@ body {
 }
 
 .cFS_content {
-    color: black;
     padding: 30px;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .cFS_container {
     span {
-        font-family: arial;
+        font-family: verdana;
     }
 
     span b {
@@ -179,8 +277,9 @@ body {
     }
 }
 
+/* ---------------------------------------------------------------------------------------*/
 .demos_content {
-    color: black;
+    color: white;
     padding: 30px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -201,9 +300,81 @@ body {
 }
 
 .other_heading {
-    color: black;
+    color: white;
     font-family: 'Orbitron', sans-serif;
     padding: 30px;
     font-weight: 1000;
     font-size: 30px;
+}
+
+.other {
+    background-color: rgb(32, 31, 31);
+    height: calc(100% - 75px);
+    width: 100%;
+}
+
+.other_content {
+    color: white;
+}
+
+.other_content a {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.directories {
+    position: relative;
+    background-color: rgb((32, 31, 31));
+    background-size: 100% 100%;
+    min-height: calc(100vh-75px);
+    /* height: calc(100% - 75px); */
+    /*75px in heighth calculation accounts for navabr*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid red;
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* border-box stops the red border from resizing the sreen*/
+}
+
+.directories_heading {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding: 30px;
+    font-weight: 1000;
+    font-size: 30px;
+}
+
+.directories_content {
+    color: white;
+    font-family: arial;
+    padding-left: 30px;
+}
+
+.directories_container {
+    span {
+        font-family: arial;
+    }
+
+    span b {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 100;
+    }
+}
+
+.directories_link {
+    color: white;
+}
+
+.directories_link:hover {
+    color: grey;
+}
+
+.directories_content a {
+    color: rgb(95, 208, 95);
+}
+
+.directories_content a:visited {
+    color: rgb(3, 116, 3);
 }

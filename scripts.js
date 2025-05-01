@@ -58,3 +58,13 @@ homeLink.addEventListener('click', (e) => {
     document.getElementById('demos').style.display = 'none';
     document.getElementById('other').style.display = 'none';
 });
+
+const logoLink = document.getElementById('logo-link');
+logoLink.addEventListener('click', (e) => {
+    document.getElementById('home').style.display = 'block';
+    document.getElementById('nos3').style.display = 'none';
+    document.getElementById('installation').style.display = 'none';
+    document.getElementById('cFS').style.display = 'none';
+    document.getElementById('demos').style.display = 'none';
+    document.getElementById('other').style.display = 'none';
+});

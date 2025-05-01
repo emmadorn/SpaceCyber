@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceCyber</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <!-- <script src="scripts.js"></script> -->
+</head>
+
+<body>
+    <header id="page-header"></header>
+    <script async src="header.js"></script>
+    
+    <div class="cFS_container">
+        <h1>What is cFS?</h1>
+        <div><span>cFS is NASA's core Flight System, a framework used to build mission software. [we should add a 
+            sentence here about vulnerability and why we created this project].
+        </span></div>
+        <h1>Create your own app on cFS Equuleus</h1>
+        <div><span>Copy directory and rename files:</span></div>
+        <ol>
+            <li><span><b>~/src/cFS/apps cp -r sample_app/my_app</b></span> </li>
+            <li><span><b>~/src/cFS/apps cd my_app</b></span></li>
+            <li><span><b>~/src/cFS/apps/my_app/fsw/src rename sample_app my_app</b></span></li>
+            <li><span><b>~/src/cFS/apps/my_app/fsw/inc rename sample_app my_app</b></span></li>
+            <li><span><b>~/src/cFS/apps/my_app/fsw/tables rename sample_app my_app</b></span></li>
+        </ol>
+        <div><span>Modify the new files:</span></div>
+        <div><span>Use Visual Studio Code (or another code editor) to replace most instances of <b>sample</b> with <b>my</b></span></div>
+        <div><span>Be sure to preserve case</span></div>
+        <div>Exceptions:</div>
+        <div><span>In <b>my_app.h</b></span></div>
+        <ol>
+            <li><span>Line 34, 35: leave as <b>sample_app_..._.h</b></span></li>
+            <li><span>Line 59: leave as <b>SAMPLE_APP_HkTlm_t</b></span></li>
+            <li><span>Line 77: leave as <b>SAMPLE_APP_NUMBER_OF_TABLES</b></span></li>
+        </ol>
+        <div><span>In <b>my_app.c</b></span></div>
+        <ol>
+            <li><span>Line 53, 74, 82, 101: leave as <b>SAMPLE_APP_PERF_ID</b></span></li>
+            <li><span>Line 124, 142, 161: leave as <b>SAMPLE_APP_PIPE_DEPTH</b></span></li>
+            <li><span>Line 187: leave as <b>SAMPLE_APP_ExampleTable_t</b></span></li>
+            <li><span>Line 196: leave as <b>SAMPLE_APP_TABLE_FILE</b></span></li>
+            <li>Comment out:
+                <ol>
+                    <li><span>Lines 183-203: <b>if(status = CFE_SUCCESS) {...}</b></span></li>
+                    <li><span>Line 115: <b>char VersionString[MY_APP_CFG_MAX_VERSION_STR_LEN];</b></span></li>
+                </ol>
+            </li>
+        </ol>
+        <div><span>In <b>my_app_cmds.h</b></span></div>
+        <ol>
+            <li><span>Lines 33-37: leave constant type as <b>SAMPLE_APP_XXX_..._.h</b></span></li>
+        </ol>
+        <div><span>In <b>my_app_cmds.c</b></span></div>
+        <ol>
+            <li><span>Change all <b>#include</b> statements</span> </li>
+            <li><span>Change all <b>SAMPLE_APP_DATA, SAMPLE_APP_NOOP_INF_EID, SAMPLE_APP_VERSION, SAMPLE_APP_RESET_INF_EID, SAMPLE_APP_VALUE_INF_EID</b></span></li>
+        </ol>
+        <div><span>In <b>my_app_utils.c</b></span></div>
+        <ol>
+            <li><span>Line 40: leave as <b>SAMPLE_APP_ExampleTable_t</b></span></li>
+            <li><span>Line 45: leave as <b>SAMPLE_APP_TBL_ELEMENT_1_MAX</b></span></li>
+            <li><span>Line 48: leave as <b>SAMPLE_APP_TABLE_OUT_OF_RANGE_ERR_CODE</b></span></li>
+            <li><span>Line 59: leave as <b>SAMPLE_APP_GetCrc</b></span></li>
+        </ol>
+        <div><span>In <b>my_app_dispatch.c</b></span></div>
+        <ol>
+            <li><span>For each case in lines 85-117: leave as <b>SAMPLE_APP...</b> (except for line 93, 100, 107 change func name to <b>MY_APP_VerifyCmdLength</b>)</span></li>
+            <li><span>Line 128: leave as <b>SAMPLE_APP_TaskPipe </b></span></li>
+            <li><span>For the case in lines 140-142: leave as <b>SAMPLE_APP...</b></span></li>
+        </ol>
+    
+        <div><span>Navigate to <b>my_app_eventids.h</b>(located in <b>my_app/fsw/inc</b>)</span></div>
+        <ol>
+            <li><span>Change all <b>sample_app</b> to <b>my_app</b></span></li>
+        </ol>
+    
+        <div><span>Navigate to <b>my_app_tbl.c</b> (located in <b>my_app/fsw/tabled</b>)</span></div>
+        <ol>
+            <li><span>Change MOST <b>sample_app</b> to <b>my_app</b></span></li>
+            <li><span>Line 26: leave type as <b>SAMPLE_APP_ExampleTable</b></span></li>
+        </ol>
+    
+        <div>Make copies of header files to build:</div>
+        <ol>
+            <li><span>Make a copy of and rename header files located in <b>./cFS/build/inc/</b></span></li>
+            <ol>
+                <li><span>Copy <b>sample_app_tbl.h</b> and rename <b>my_app_tbl.h</b></span></li>
+                <li><span>Copy <b>sample_app_prefids.g</b> and rename <b>my_app_perfids.h</b></span></li>
+                <li><span>Copy <b>sample_app_msg.h</b> and rename <b>my_app_msg.h</b></span></li>
+                <li><span>Change all <b>sample_app</b> to <b>my_app</b> within these files</span></li>
+                <li><span>Navigate to <b>my_app/config/default_sample_app_[insert header name].h</b> and change the corresponding files as shown below:</span></li>
+                <ol>
+                    <li><span><b>default_my_app_msg.h</b></span></li>
+                    <li><span><b>default_my_app_perfids.h</b></span></li>
+                    <li><span><b>default_my_app_tbl.h</b></span></li>
+                </ol>
+            </ol>
+            <li><span>Make a copy of and rename header files located in <b>./cFS/build/native/default_cpu1/inc/</b></span></li>
+            <ol>
+                <li><span>rename <b>sample_app_perfids.h</b> to <b>my_app_perfids.h</b></span></li>
+                <li><span>rename <b>sample_app_msgids.h</b> to <b>my_app_msgids.h</b></span></li>
+                <li><span>change all <b>sample_app</b>to <b>my_app</b> inside of these header files</span></li>
+                <li><span>Navigate to my_app_config/default_sample_app_[insert header name].h and change the corresponding files as show below:</span></li>
+                <ol>
+                    <li><span><b>default_my_app_msgids.h</b></span></li>
+                    <li><span><b>default_my_app_perfids.h</b>(this should already have been changed)</span></li>
+                </ol>
+            </ol>
+        </ol>
+        <div><span>Update <b>cmake</b> files:</span></div>
+        <ol>
+            <li><span>Navigate to <b>cFS/apps/my_app</b></span></li>
+            <li><span>Access <b>arch_build.cmake</b></span></li>
+            <ol>
+                <li><span>Line 15: change <b>sample_app_perfids.h</b> to <b>my_app_perfids.h</b></span></li>
+                <li><span>Line 15: change <b>sample_app_msgids.h</b> to <b>my_app_msgids.h</b></span></li>
+            </ol>
+            <li><span>Access <b>mission_build.cmake</b></span></li>
+            <ol>
+                <li><span>Line 16: change <b>sample_app_perfids.h</b> to <b>my_app_perfids.h</b></span></li>
+                <li><span>Line 17: change <b>sample_app_msg.h</b> to <b>my_app_msg.h</b></span></li>
+                <li><span>Line 20: change <b>sample_app_tbl.h</b> to <b>my_app_tbl.h</b></span></li>
+            </ol>
+            <li><span>Access <b>CMakeLists.txt</b></span></li>
+            <ol>
+                <li><span>Change all <b>sample_app </b> to <b>my_app</b> EXCEPT line 25: leave as <b>sample_lib</b></span></li>
+            </ol>
+            <li><span>Navigate to <b>cFS/sample_defs</b></span></li>
+            <li><span>Access <b>targets.cmake</b></span></li>
+            <ol>
+                <li><span>Line 89: <b>list(APPEND_MISSION_GLOBAL_APPLIST sample_app [my_app] sample_lib)</b></span></li>
+            </ol>
+            <li><span>Access <b>cpu1_cfe_es_startup.src</b></span></li>
+            <ol>
+                <li><span>Copy line 3: <b>CFE_APP, sample_app, SAMPLE_APP_Main, SAMPLE_APP,...</b></span></li>
+                <li>Create a new line 4 below line 3 and paste</li>
+                <li><span>Change all <b>sample_app</b> to <b>my_app</b></span></li>
+            </ol>
+        </ol>
+        <div><span>Rebuild and re-run in terminal:</span></div>
+        <div><span><b>cd </b> to home directory</span></div>
+        <div><span><b>make</b></span></div>
+        <div><span><b>make SIMULATION=native prep</b></span></div>
+        <div><span><b>make install</b></span></div>
+        <div><span><b>cd build/exe/cpu1</b></span></div>
+        <div><span><b>./core-cpu1</b></span></div>
+    </div>
+</body>

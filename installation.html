@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceCyber</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <!-- <script src="scripts.js"></script> -->
+</head>
+<body>
+    <header id="page-header"></header>
+    <script async src="header.js"></script>
+
+    <div class="content-container installation" id="installation">
+        <div class="installation_heading">
+            Setting up NOS3
+        </div>
+        <div class="installation_content">
+            <div class="installation_container">
+                <h1>Requirements</h1>
+                <div> <span>Using a virtualmachine (VM):</span></div>
+                <ul>
+                    <li>Git 2.47+</li>
+                    <li>Vagrant 2.4.3+</li>
+                    <li>VirtualBox 7.1.6+ (<a class="install_link" href="https://www.virtualbox.org/wiki/Downloads">link to downloading virtualbox</a>)</li>
+                </ul>
+                <div>Linux:</div>
+                <ul>
+                    <li>Git 2.47+</li>
+                    <li>Docker and docker compose</li>
+                </ul>
+                <h1>Verify requirements</h1>
+                <div>VM:</div>
+                <ul>
+                    <li><span>In terminal, run <b>git --version</b></span></li>
+                    <li><span>In terminal, run <b>vagrant --version</b></span></li>
+                </ul>
+                <h1>Open terminal and run the following commands</h1>
+                <ul>
+                    <li><span><b>git clone https.//github.com/nasa/nos3.git</b></span></li>
+                    <li><span><b>cd nos3</b></span></li>
+                    <li><span><b>git submodule update --init --recursive</b></span></li>
+                </ul>
+                <div>For VM:</div>
+                <ul>
+                    <li><span><b>vagrant up</b></span></li>
+                    <li><span><b>vagrant halt</b></span></li>
+                </ul>
+                <div>Now open VirtualBox and start the VM</div>
+                <div><span>Use the password <b>jstar123!</b> to log in to <b>jstar</b></span></div>
+                <h1>Running NOS3</h1>
+                <div>In terminal, run the following commands:</div>
+                <ul>
+                    <li><span><b>cd ~/Desktop/github-nos3</b></span></li>
+                    <li><span><b>make prep</b></span></li>
+                    <li><span><b>make</b></span></li>
+                    <li><span><b>make launch</b></span></li>
+                </ul>
+                <h1>Stopping NOS3</h1>
+                <ul>
+                    <li><span><b>make stop</b></span></li>
+                    <li><span><b>make clean</b></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
