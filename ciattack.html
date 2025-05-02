@@ -14,75 +14,87 @@
     <script async src="header.js"></script>
 
     <div class="content-container ci" id="ci">
-        <div class="ci-heading">cFS: Exploiting the Command Ingest Module</div>
+        <div class="ci-heading gen_header">cFS: Exploiting the Command Ingest Module</div>
         <div class="ci-content">
             <div class="text-block paragraph1">1. What is the Command Ingest Module
                 and how does it work?
             </div>
-            <div class="text-block paragraph2">
-                a.  “ci_lab” (Command Ingest Lab) is responsible for 
+            <div class="text-block paragraph1">
+                <ol type="a">
+                    <li>
+                        “ci_lab” (Command Ingest Lab) is responsible for 
                 receiving and processing the ground commands that are typically 
                 sent during mission operations. These commands may be sent to 
                 control various subsystems of the spacecraft (e.g., thermal, power, 
                 or communication) 
-            </div>
-            <div class="text-block paragraph2">
-                b.  The Command Ingestor in cFS is responsible for 
-                receiving, interpreting, and validating commands.
+                    </li>
+
+                    <li>
+                        The Command Ingestor in cFS is responsible for 
+                        receiving, interpreting, and validating commands.
+                    </li>
+                </ol>
+                 
             </div>
             <div class="text-block paragraph1">
                 2. What is the basic flow of how command get where they need to be?
-            </div>
-            <div class="text-block paragraph2">
-                a. Ground sends the command
-            </div>
-            <div class="text-block paragraph2">
-                b. Command Ingest Module processes the command
-            </div>
-            <div class="text-block paragraph2">
-                c. Message is placed on the software bus
-                <ol type="i"> 
+                <ol type="a">
                     <li>
-                        The Software Bus is implemented as a message queue, 
-                        and when a command is placed onto the bus, it is placed 
-                        into the queue as a message.
+                        Ground sends the command
                     </li>
                     <li>
-                        The message is then made available for subscribed 
-                        apps or components to read and process.
+                        Command Ingest Module processes the command
                     </li>
                     <li>
-                        Message Routing: The SB service routes the message to the appropriate 
-                        pipe based on the message ID. Each application subscribes to specific message 
-                        IDs, so the SB service knows which pipe to send the message to
+                        Message is placed on the software bus
+                        <ol type="i">
+                            <li>
+                                The Software Bus is implemented as a message queue, 
+                                and when a command is placed onto the bus, it is placed 
+                                into the queue as a message.
+                            </li>
+
+                            <li>
+                                The message is then made available for subscribed 
+                                apps or components to read and process.
+                            </li>
+
+                            <li>
+                                Message Routing: The SB service routes the message to the appropriate 
+                                pipe based on the message ID. Each application subscribes to specific message 
+                                IDs, so the SB service knows which pipe to send the message to
+                            </li>
+
+                            <li>
+                                The SB service maintains a subscription table that maps message IDs 
+                                to the pipes of subscribing applications. This table is updated whenever 
+                                an application subscribes to or unsubscribes from a message ID
+                            </li>
+
+                        </ol>
                     </li>
                     <li>
-                        The SB service maintains a subscription table that maps message IDs 
-                        to the pipes of subscribing applications. This table is updated whenever 
-                        an application subscribes to or unsubscribes from a message ID
-                    </li>
-                </ol>
-            </div>
-            <div class="text-block paragraph2">
-                d. Application(s) meant to act on the command retrieve it from the bus
-                <ol type="i">
-                    <li>
-                        Pipe Creation: Each application that needs to receive commands 
+                        Application(s) meant to act on the command retrieve it from the bus
+                        <ol type="i">
+                            <li>
+                                Pipe Creation: Each application that needs to receive commands 
                         creates a pipe using the SB service. A pipe is essentially a queue 
-                        that holds messages until the application processes them. 
+                        that holds messages until the application processes them.
+                            </li>
+                        </ol>
                     </li>
-                </ol>
-            </div>
-            <div class="text-block paragraph2">
-                e. Command Handler within the app process the command and tasks the action to be executes
-                <ol type="i">
                     <li>
-                        After executing the command, the application may generate a status message or 
+                        Command Handler within the app process the command and tasks the action to be executes
+                        <ol type="i">
+                            <li>
+                                After executing the command, the application may generate a status message or 
                         telemetry data to indicate whether the command was successfully executed or 
                         whether an error occurred.
+                            </li>
+                        </ol>
                     </li>
                 </ol>
-            </div>
+            </div> 
             <div class="text-block paragraph1">
                 Example:
             </div>
@@ -94,16 +106,15 @@
                     <li>Thermal Application increases the internal temperature 5 degrees</li>
                 </ol>
             </div>
-            <div class="text-block paragraph2">
+            <div class="text-block paragraph1">
                 3. How can we exploit the Command Ingest Module?
             </div>
-            <div class="text-block paragraph2">
+            <div class="text-block paragraph1">
                 <ol type="a">
-                    <li>Impersonate ci_lab</li>
-                    <li>
-                        <ol type="a">
+                    <li>Impersonate ci_lab
+                        <ol type="i">
                             <li>
-                                i.	Goal: Another app connected on the SB impersonates 
+                                Goal: Another app connected on the SB impersonates 
                                 the communications sent from the command ingest module 
                                 to other applications, and the other applications onboard 
                                 have no way of distinguishing, so as such they assume every 
@@ -111,16 +122,107 @@
                             </li>
                             <li>
                                 How do we impersonate the communications of ci_lab?
-                                1.	Subscribe to the same things at ci_lab 
-                                    a.	Allows us to listen 
-                                2.	Subscribe to all potential messages 
-                                    a.	Subscription Registration: When an application starts, 
-                                    it registers with the SB service and subscribes to specific 
-                                    message IDs. This is done using the CFE_SB_Subscribe function, 
-                                    where the application specifies the message IDs it wants to receive
+                                <ol>
+                                    <li type="1">
+                                        Subscribe to the same things at ci_lab (allow us to listen)
+                                    </li>
+                                    <li>
+                                        Subscribe to all potential messages. Subscription Registration: When an application starts, 
+                                        it registers with the SB service and subscribes to specific 
+                                        message IDs. This is done using the CFE_SB_Subscribe function, 
+                                        where the application specifies the message IDs it wants to receive
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                Steps:
+                                <ol type="1">
+                                    <li>
+                                        Create a new application: ci2_lab 
+                                    </li>
+                                    <li>
+                                        Subscribe to the same things ci_lab subscribes to: 
+                                    </li>
+                                    <li>
+                                        Get every app to subscribe to ci2_lab 
+                                    </li>
+                                    <li>
+                                        Figure out how to send NOOP command to apps
+                                    </li>
+                                    <li>
+                                        Create a log to track the commands ci_lab sends. a.	Used to analyze data, recognize patterns, 
+                                        and inform future decisions of the attacker 
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                What are we missing? How do we get every app to subscribe to our messages? 
                             </li>
                         </ol>
                     </li>
+                    <li>
+                        Modifying Message Content
+                        <ol type="a">
+                            <li>
+                                How can we modify messages being sent from the Command Ingest Module? 
+                                <ol type="1">
+                                    <li>
+                                        3 key components of messages to consider attacking:
+                                        <ol type="a">
+                                            <li>
+                                                Message reception: command messages received on SB
+                                            </li>
+                                            <li>
+                                                b.	Message validation: validation of formatting,
+                                                 integrity and authorization
+                                            </li>
+                                            <li>
+                                                c.	Message routing: messages routed to appropriate app
+                                                 based on MID (message ID)
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        Gaining access/control to a more trusted app that has 
+                                        access to higher level privileges might bypass certain safeguards
+                                    </li>
+                                    <li>
+                                        Exploiting potential vulnerabilities in command packet validation 
+                                    </li>
+                                    <li>   
+                                        May not be feasible to attack message routing directly due to high privilege level of the SB
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                What does modifying messages do for the attacker? 
+                                <ol type="1">
+                                    <li>
+                                        Privilege escalation: message fields related to level of 
+                                        access could be tampered with to make the system believe a 
+                                        low-privilege message has high-privilege access if measures aren’t 
+                                        taken in the validation of messages
+                                    </li>
+                                    <li>
+                                        Data corruption: messages could have the potential of carrying malicious data that alter 
+                                        things such as telemetry, sensor, or mission data, leading to system processing incorrect 
+                                        values and result in corrupted logs, incorrect operational decisions, or the loss of mission data   
+                                    </li>
+                                    <li>
+                                        Create backdoors: messages could contain hidden functionality that would allow a backdoor 
+                                        to be created, potentially reconfiguring subsystems to accept malicious commands
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        Message ID Storage and Management 
+                        <ol type="i">
+                            How can we use the message ID storage and management to exploit the satellite? 
+                        </ol>
+                    </li>
+                    
                 </ol>
             </div>
         </div>

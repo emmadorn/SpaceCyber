@@ -82,7 +82,8 @@ body {
     height: 100%;
     width: 30%;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    padding: 10px;
 }
 
 /* ----------------------------------- CONTENT PAGE STYLES ----------------------------------------*/
@@ -275,6 +276,11 @@ body {
         font-family: 'Courier New', Courier, monospace;
         font-weight: 100;
     }
+
+    padding: 40px;
+
+    background-color: rgb(32, 31, 31);
+    color: white;
 }
 
 /* ---------------------------------------------------------------------------------------*/
@@ -377,4 +383,41 @@ body {
 
 .directories_content a:visited {
     color: rgb(3, 116, 3);
+}
+
+.video-titles {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    padding-top: 40px;
+}
+
+.app_header {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding-bottom: 30px;
+    font-weight: 1000;
+    font-size: 30px;
+}
+
+.gen_header {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding-bottom: 30px;
+    font-weight: 1000;
+    font-size: 30px;
+}
+
+.paragraph4 {
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.code1 {
+    color: white;
+    padding-top: 30px;
+}
+
+.code2 {
+    color: white;
+    margin-left: 30px;
 }
